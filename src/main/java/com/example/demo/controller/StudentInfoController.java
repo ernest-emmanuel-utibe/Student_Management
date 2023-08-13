@@ -40,6 +40,13 @@ public class StudentInfoController {
         return ResponseEntity.ok(studentInfoService.getRegisteredStudentsByTheirID(id));
     }
 
+    @PutMapping("/update-students/{id}")
+    public ResponseEntity<StudentInfo> updateStudentsByTheirId(@RequestBody StudentInfoRequest studentInfoRequest,
+            @PathVariable("id") Long updatedStudentId) {
+        StudentInfo studentInfoResponse = studentInfoService.updateStudentsByTheirId(studentInfoRequest, updatedStudentId);
+        return new ResponseEntity<>(studentInfoResponse, HttpStatus.OK);
+    }
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteStudents(@PathVariable("id") Long studentId) {
         studentInfoService.deleteStudentById(studentId);

@@ -63,6 +63,19 @@ public class StudentInfoServiceImpl implements StudentInfoService {
     }
 
     @Override
+    public StudentInfo updateStudentsByTheirId(StudentInfoRequest studentInfoRequest, Long id) {
+        StudentInfo studentInfo = studentInfoRepository.findById(id).orElseThrow(() -> new StudentNotFoundException("Student with this id not found"));
+        studentInfo.setFirstName(studentInfoRequest.getFirstName());
+        studentInfo.setLastName(studentInfoRequest.getLastName());
+        studentInfo.setAddress(studentInfoRequest.getAddress());
+        studentInfo.setGender(studentInfoRequest.getGender());
+        studentInfo.setEmail(studentInfoRequest.getEmail());
+        studentInfo.setPassword(studentInfoRequest.getPassword());
+
+        return studentInfoRepository.save(studentInfo);
+    }
+
+    @Override
     public void deleteStudentById(Long studentId) {
         StudentInfo studentInfo = studentInfoRepository.findById(studentId).orElseThrow(() -> new StudentNotFoundException("Student id not found"));
         studentInfoRepository.delete(studentInfo);

@@ -17,5 +17,7 @@ public interface StudentInfoService {
 
     StudentInfoRequest getRegisteredStudentsByTheirID(Long registeredStudent);
 
+    StudentInfo updateStudentsByTheirId(StudentInfoRequest studentInfoRequest, Long id);
+
     void deleteStudentById(Long studentId);
 }
