@@ -5,6 +5,7 @@ package com.example.demo.controller;
  **/
 
 
+import com.example.demo.data.dto.StudentDto;
 import com.example.demo.data.dto.request.StudentInfoRequest;
 import com.example.demo.data.dto.response.StudentInfoResponse;
 import com.example.demo.data.model.StudentInfo;
@@ -23,8 +24,8 @@ public class StudentInfoController {
 
     @PostMapping("/register-students")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<StudentInfo> registerStudents(@RequestBody StudentInfoRequest request) {
-        return new ResponseEntity<>(studentInfoService.registerStudent(request), HttpStatus.CREATED);
+    public ResponseEntity<StudentInfo> registerStudents(@RequestBody StudentInfoRequest request, StudentDto studentDto) {
+        return new ResponseEntity<>(studentInfoService.registerStudent(request, studentDto), HttpStatus.CREATED);
     }
 
     @GetMapping("/get-all-students")

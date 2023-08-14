@@ -5,13 +5,14 @@ package com.example.demo.services;
  * **/
 
 
+import com.example.demo.data.dto.StudentDto;
 import com.example.demo.data.dto.request.StudentInfoRequest;
 import com.example.demo.data.dto.response.StudentInfoResponse;
 import com.example.demo.data.model.StudentInfo;
 
 
 public interface StudentInfoService {
-    StudentInfo registerStudent(StudentInfoRequest studentInfoRequest);
+    StudentInfo registerStudent(StudentInfoRequest studentInfoRequest, StudentDto studentDto);
 
     StudentInfoResponse getAllRegisteredStudents(int pageNo, int pageSize);
 

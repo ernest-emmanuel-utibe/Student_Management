@@ -4,12 +4,14 @@ package com.example.demo.services.impl;
  * @author ERNEST EMMANUEL UTIBE
 **/
 
+import com.example.demo.data.dto.StudentDto;
 import com.example.demo.data.dto.request.StudentInfoRequest;
 import com.example.demo.data.dto.response.StudentInfoResponse;
 import com.example.demo.data.model.StudentInfo;
 import com.example.demo.data.repository.StudentInfoRepository;
-import com.example.demo.exception.StudentNotFoundException;
+import com.example.demo.exception.student.StudentNotFoundException;
 import com.example.demo.services.StudentInfoService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,13 +22,20 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class StudentInfoServiceImpl implements StudentInfoService {
 
     private final StudentInfoRepository studentInfoRepository;
 
 
     @Override
-    public StudentInfo registerStudent(StudentInfoRequest studentInfoRequest) {
+    public StudentInfo registerStudent(StudentInfoRequest studentInfoRequest, StudentDto studentDto) {
+        if (emailExists(studentDto.getEmail())) {
+            throw new StudentNotFoundException("There is an account with that email address: "
+                    + studentDto.getEmail());
+        }
+
+
         StudentInfo studentInfo = new StudentInfo();
         studentInfo.setFirstName(studentInfoRequest.getFirstName());
         studentInfo.setLastName(studentInfoRequest.getLastName());
@@ -90,6 +99,10 @@ public class StudentInfoServiceImpl implements StudentInfoService {
         studentInfoRequest.setEmail(studentInfo.getEmail());
         studentInfoRequest.setAddress(studentInfo.getAddress());
         return studentInfoRequest;
+    }
+
+    private boolean emailExists(String email) {
+        return studentInfoRepository.findByEmail(email) != null;
     }
 
 
