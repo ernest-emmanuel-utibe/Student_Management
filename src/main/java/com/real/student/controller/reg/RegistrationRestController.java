@@ -113,7 +113,7 @@ public class RegistrationRestController {
         return new GenericResponse(messages.getMessage("message.updatePasswordSuc", null, locale));
     }
 
-    // Change user 2 factor authentication
+    // Change user 2-factor authentication
     @PostMapping("/user/update/2fa")
     public GenericResponse modifyUser2FA(@RequestParam("use2FA") final boolean use2FA) throws UnsupportedEncodingException {
         final User user = userService.updateUser2FA(use2FA);
@@ -147,7 +147,7 @@ public class RegistrationRestController {
     }
 
     private String getAppUrl(HttpServletRequest request) {
-        return "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+        return "https://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
     }
 
     private String getClientIP(HttpServletRequest request) {

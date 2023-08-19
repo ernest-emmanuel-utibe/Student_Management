@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 public class StudentInfoController {
+
     private final StudentInfoService studentInfoService;
 
     @PostMapping("/register-students")

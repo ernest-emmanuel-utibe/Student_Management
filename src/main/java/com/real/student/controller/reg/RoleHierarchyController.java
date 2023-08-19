@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class RoleHierarchyController {
 
     @GetMapping("/roleHierarchy")
-    public ModelAndView roleHierarcy() {
+    public ModelAndView roleHierarchy() {
         ModelAndView model = new ModelAndView();
         model.addObject("adminMessage","Admin content available");
         model.addObject("staffMessage","Staff content available");

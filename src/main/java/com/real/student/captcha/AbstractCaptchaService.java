@@ -6,6 +6,8 @@ package com.real.student.captcha;
 
 
 import java.util.regex.Pattern;
+
+import com.real.student.exception.ReCaptchaInvalidException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;

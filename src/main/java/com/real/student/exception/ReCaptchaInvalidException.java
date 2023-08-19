@@ -1,5 +1,7 @@
 package com.real.student.exception;
-
+/**
+ * @author ERNEST EMMANUEL UTIBE
+ * */
 public final class ReCaptchaInvalidException extends RuntimeException {
 
     public ReCaptchaInvalidException() {

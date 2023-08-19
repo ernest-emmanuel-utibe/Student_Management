@@ -70,7 +70,6 @@ public class UserService implements IUserService {
     public static String QR_PREFIX = "https://chart.googleapis.com/chart?chs=200x200&chld=M%%7C0&cht=qr&chl=";
     public static String APP_NAME = "SpringRegistration";
 
-    // API
 
     @Override
     public User registerNewUserAccount(final UserDto accountDto) {

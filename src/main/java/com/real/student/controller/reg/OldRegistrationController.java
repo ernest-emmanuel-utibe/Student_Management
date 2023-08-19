@@ -85,8 +85,8 @@ public class OldRegistrationController {
         }
 
         final User user = verificationToken.getUser();
-        final Calendar cal = Calendar.getInstance();
-        if ((verificationToken.getExpiryDate().getTime() - cal.getTime().getTime()) <= 0) {
+        final Calendar calendar = Calendar.getInstance();
+        if ((verificationToken.getExpiryDate().getTime() - calendar.getTime().getTime()) <= 0) {
             model.addAttribute("message", messages.getMessage("auth.message.expired", null, locale));
             model.addAttribute("expired", true);
             model.addAttribute("token", token);
@@ -126,7 +126,7 @@ public class OldRegistrationController {
         final VerificationToken newToken = userService.generateNewVerificationToken(existingToken);
         final User user = userService.getUser(newToken.getToken());
         try {
-            final String appUrl = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+            final String appUrl = "https://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
             final SimpleMailMessage email = constructResetVerificationTokenEmail(appUrl, request.getLocale(), newToken, user);
             mailSender.send(email);
         } catch (final MailAuthenticationException e) {
@@ -152,7 +152,7 @@ public class OldRegistrationController {
         final String token = UUID.randomUUID().toString();
         userService.createPasswordResetTokenForUser(user, token);
         try {
-            final String appUrl = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+            final String appUrl = "https://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
             final SimpleMailMessage email = constructResetTokenEmail(appUrl, request.getLocale(), token, user);
             mailSender.send(email);
         } catch (final MailAuthenticationException e) {
@@ -171,20 +171,20 @@ public class OldRegistrationController {
     public String changePassword(final HttpServletRequest request, final Model model, @RequestParam("id") final long id, @RequestParam("token") final String token) {
         final Locale locale = request.getLocale();
 
-        final PasswordResetToken passToken = userService.getPasswordResetToken(token);
-        if (passToken == null || passToken.getUser().getId() != id) {
+        final PasswordResetToken passwordResetToken = userService.getPasswordResetToken(token);
+        if (passwordResetToken == null || passwordResetToken.getUser().getId() != id) {
             final String message = messages.getMessage("auth.message.invalidToken", null, locale);
             model.addAttribute("message", message);
             return "redirect:/login.html?lang=" + locale.getLanguage();
         }
 
-        final Calendar cal = Calendar.getInstance();
-        if ((passToken.getExpiryDate().getTime() - cal.getTime().getTime()) <= 0) {
+        final Calendar calendar = Calendar.getInstance();
+        if ((passwordResetToken.getExpiryDate().getTime() - calendar.getTime().getTime()) <= 0) {
             model.addAttribute("message", messages.getMessage("auth.message.expired", null, locale));
             return "redirect:/login.html?lang=" + locale.getLanguage();
         }
 
-        final Authentication auth = new UsernamePasswordAuthenticationToken(passToken.getUser(), null, userDetailsService.loadUserByUsername(passToken.getUser().getEmail()).getAuthorities());
+        final Authentication auth = new UsernamePasswordAuthenticationToken(passwordResetToken.getUser(), null, userDetailsService.loadUserByUsername(passwordResetToken.getUser().getEmail()).getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(auth);
 
         return "redirect:/updatePassword.html?lang=" + locale.getLanguage();
@@ -224,3 +224,4 @@ public class OldRegistrationController {
         email.setFrom(env.getProperty("support.email"));
         return email;
     }
+}

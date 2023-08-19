@@ -1,6 +1,4 @@
 package com.real.student.controller.reg;
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 
 import com.real.student.captcha.CaptchaServiceV3;
 import com.real.student.captcha.ICaptchaService;

@@ -1,4 +1,7 @@
 package com.real.student.exception;
+/**
+ * @author ERNEST EMMANUEL UTIBE
+ * */
 
 import com.real.student.data.util.GenericResponse;
 import com.real.student.exception.user.UserAlreadyExistException;

@@ -5,6 +5,9 @@ package com.real.student.captcha;
  * */
 
 import java.net.URI;
+
+import com.real.student.exception.ReCaptchaInvalidException;
+import com.real.student.exception.ReCaptchaUnavailableException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

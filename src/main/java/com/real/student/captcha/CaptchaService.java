@@ -6,14 +6,20 @@ package com.real.student.captcha;
 
 
 import java.net.URI;
+
+import com.real.student.exception.ReCaptchaInvalidException;
+import com.real.student.exception.ReCaptchaUnavailableException;
+import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestOperations;
 
 @Service("captchaService")
 public class CaptchaService extends AbstractCaptchaService{
     private final static Logger LOGGER = LoggerFactory.getLogger(CaptchaService.class);
+
 
     @Override
     public void processResponse(final String response) {

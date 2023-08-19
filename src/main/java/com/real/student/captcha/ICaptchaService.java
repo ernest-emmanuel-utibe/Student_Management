@@ -1,5 +1,7 @@
 package com.real.student.captcha;
 
+import com.real.student.exception.ReCaptchaInvalidException;
+
 /**
  * @author ERNEST EMMANUEL UTIBE
  * */
