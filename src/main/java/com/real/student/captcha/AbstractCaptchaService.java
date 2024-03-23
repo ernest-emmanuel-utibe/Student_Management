@@ -4,9 +4,7 @@ package com.real.student.captcha;
  * @author ERNEST EMMANUEL UTIBE
  * */
 
-
 import java.util.regex.Pattern;
-
 import com.real.student.exception.ReCaptchaInvalidException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
